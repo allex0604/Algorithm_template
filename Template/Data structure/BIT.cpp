@@ -8,22 +8,27 @@ using namespace std;
     (2) https://www.csie.ntu.edu.tw/~sprout/algo2021/homework/hand10.pdf
     BIT tree == Binary Indexed Tree, also called Fenwick Tree
     knowledge : 
-        lowerbit(i) ==> 指的是把i轉成二進位後，把最低位的1以外的1都變成0， ex. lowerbit(56) == lowerbit(111000) = lowerbit(1000) = lowerbit(8)
+        lowerbit(i) ==> 指的是把i轉成二進位後，把最低位的1以外的1都變成0， ex. lowerbit(56) == lowerbit(111000) = 1000 = 8
                     ==> lowerbit(i) = i & -i
         father of index i == i - lowerbit(i)
         the range of index i = [p+1, i], p = father
     operation :
-    1. build
+    1. build : n update
     2. query : range[1, x] ==> [1, x] 的區間可以拆成 [1, x−lowbit(x)] 和 [x−lowbit(x)+1, x] 
     3. query : range[l, r] 
-    4. update one element : update every range which includes this element
+    4. 單點修改: update every range which includes this element
     ==> 修改它和它祖先的所有右兄弟節點
-    5. update a range [l, r]
+    5. range [l, r]之間總共修改val(意義不明)
+
+    time complexity :
+        query : O(logn)
+        update : O(logn)
 */
 
 template<class T>
 struct BIT
 {
+    // a[1] ~ a[m]
     int _n;
     vector<T> t;
     BIT(){}
@@ -47,9 +52,9 @@ struct BIT
         for(; i <= n; i += (i & -i)) t[i] += val;
     }
 
-    void upd(int l, int r, T val){
+    void upd(int l, int r, T val) {
         upd(l, val);
-        upd(r+1, -val);
+        upd(r + 1, -val);
     }
 };
 
