@@ -31,6 +31,7 @@ void visit (int vertex) {
 
 int main () {
     /* problem statement: given a connected graph. calculate the number of bridges. */
+    /* 如果要print bridge ex. edge uv, visit就要傳parent是誰.  */
     ios::sync_with_stdio(false);
 
     int vertexc, edgec;
