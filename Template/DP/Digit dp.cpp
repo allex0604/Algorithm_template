@@ -20,19 +20,15 @@ int call(int p, int cnt, int f){
         return dp[p][cnt][f];
 
     ll ret = 0;
-    int LMT;
-    if(f == 0){
-        LMT = v[p];
-    }else{
-        LMT = 9;
-    }
+    int LMT = (f == 0) ? v[p] : 9;
 
     for(int i=0; i<=LMT; i++){
         int nf = f;
         int ncnt = cnt;
         if(f == 0 && i < LMT) nf = 1;
         if(i == d) ncnt++;
-        ret = (ret + call(p-1, ncnt, nf)) % mod; 
+        ret = ret + call(p-1, ncnt, nf); 
+        /* ret = (ret + call(p-1, ncnt, nf)) % mod;   */
     }
 
     return dp[p][cnt][f] = ret;
@@ -52,7 +48,8 @@ int solve(ll n){
 
 int32_t main(){
     cin >> a >> b >> d >> k;
-    ll res = (solve(b) - solve(a-1) + mod) % mod;
+    ll res = solve(b) - solve(a-1);
+    /*  ll res = (solve(b) - solve(a-1) + mod) % mod; */
     cout << res << endl;
     return 0;
 }
