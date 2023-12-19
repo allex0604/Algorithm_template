@@ -10,6 +10,7 @@ int32_t main()
 {
     int n , m; cin >> n >> m;
     vector<vector<int>> d(n+1, vector<int>(n+1, INF));
+    for(int i=0; i<n; i++) d[i][i] = 0;
     for(int i=0; i<m; i++){
         int u, v; cin >> u >> v;
         cin >> d[u][v];
