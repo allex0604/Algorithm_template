@@ -8,9 +8,8 @@ const int N = 1e6;
 vector<int> SPF(N);
 vector<int> primes;
 
+// time compliexity = O(N)
 void sieve(){
-    bool p[N];
-    memset(p, true, sizeof(p));
     for(int i=2; i < N; i++){
         if(SPF[i] == 0) SPF[i] = i, primes.push_back(i);
         int sz = primes.size();
